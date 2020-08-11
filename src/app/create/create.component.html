@@ -1,0 +1,63 @@
+<h2 class="heading">Create Note</h2>
+<mat-vertical-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Add Title</ng-template>
+      <mat-form-field>
+        <mat-label>Note Title</mat-label>
+        <input matInput placeholder="name" formControlName="header" required />
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperNext class="on-hover">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel id="highlight">Add Content</ng-template>
+      <mat-form-field>
+        <mat-label>Note Contents</mat-label>
+        <textarea
+          matInput
+          formControlName="content"
+          placeholder="contents"
+          required
+        ></textarea>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious class="on-hover">
+          Back
+        </button>
+        &nbsp;&nbsp;
+        <button mat-raised-button matStepperNext class="on-hover">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel id="highlight">Add Note</ng-template>
+    <p>Click save to add note</p>
+    <div>
+      <button
+        mat-raised-button
+        (click)="stepper.reset()"
+        class="on-hover"
+        matTooltip="Reset"
+      >
+        Reset</button
+      >&nbsp;&nbsp;
+
+      <button
+        [disabled]="isSave"
+        mat-raised-button
+        color="primary"
+        class="on-save"
+        (click)="saveNote(stepper)"
+        matTooltip="Save Note"
+      >
+        Save
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+
+<router-outlet></router-outlet>
